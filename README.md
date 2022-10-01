@@ -9,7 +9,7 @@
 4.1 Revise la Caja de Texto, aparecera el Hash del Fichero
 
 ### Urls
-[ChecksumHash Repo](github.com/j0rd1s3rr4n0/checksumhash)
+[ChecksumHash Repo](https://github.com/j0rd1s3rr4n0/checksumhash)
 
 
-[J0RD1S3RR4N0](github.com/j0rd1s3rr4n0)
+[J0RD1S3RR4N0](https://github.com/j0rd1s3rr4n0)
