@@ -1,4 +1,5 @@
 # ChecksumHash
+ ![alt text](https://i.imgur.com/P5YCOBd.png "File CheckSumHash")
 ## ¿Que es ChecksumHash?
 **ChecksumHash** es un programa desarrollado en *C#* que permite calcular hashes en SHA1, SHA256, SHA384 ,SHA512 y MD5 de archivos.
 #### ¿Cómo generar un Hash?
