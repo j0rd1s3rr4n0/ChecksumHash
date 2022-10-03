@@ -45,6 +45,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tb_error = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -53,9 +54,9 @@
             // 
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Location = new System.Drawing.Point(465, 12);
+            this.groupBox1.Location = new System.Drawing.Point(502, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(421, 218);
+            this.groupBox1.Size = new System.Drawing.Size(384, 235);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Info";
@@ -68,7 +69,7 @@
             this.label4.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label4.Location = new System.Drawing.Point(33, 47);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(374, 156);
+            this.label4.Size = new System.Drawing.Size(283, 179);
             this.label4.TabIndex = 1;
             this.label4.Text = resources.GetString("label4.Text");
             this.label4.Click += new System.EventHandler(this.label4_Click);
@@ -94,7 +95,7 @@
             // 
             // btnCalculasHash
             // 
-            this.btnCalculasHash.Location = new System.Drawing.Point(255, 221);
+            this.btnCalculasHash.Location = new System.Drawing.Point(195, 221);
             this.btnCalculasHash.Name = "btnCalculasHash";
             this.btnCalculasHash.Size = new System.Drawing.Size(177, 46);
             this.btnCalculasHash.TabIndex = 1;
@@ -108,7 +109,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(31, 221);
+            this.button2.Location = new System.Drawing.Point(12, 221);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(177, 46);
             this.button2.TabIndex = 2;
@@ -133,15 +134,15 @@
             this.tb_hash.Multiline = true;
             this.tb_hash.Name = "tb_hash";
             this.tb_hash.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tb_hash.Size = new System.Drawing.Size(401, 104);
+            this.tb_hash.Size = new System.Drawing.Size(441, 104);
             this.tb_hash.TabIndex = 4;
             this.tb_hash.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(31, 277);
+            this.progressBar1.Location = new System.Drawing.Point(1, 281);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(401, 10);
+            this.progressBar1.Size = new System.Drawing.Size(894, 10);
             this.progressBar1.TabIndex = 5;
             this.progressBar1.Click += new System.EventHandler(this.progressBar1_Click);
             // 
@@ -161,7 +162,7 @@
             this.cb_hastype.Location = new System.Drawing.Point(142, 187);
             this.cb_hastype.Name = "cb_hastype";
             this.cb_hastype.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.cb_hastype.Size = new System.Drawing.Size(290, 28);
+            this.cb_hastype.Size = new System.Drawing.Size(230, 28);
             this.cb_hastype.Sorted = true;
             this.cb_hastype.TabIndex = 6;
             this.cb_hastype.TabStop = false;
@@ -180,9 +181,9 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.tb_error);
-            this.groupBox2.Location = new System.Drawing.Point(463, 228);
+            this.groupBox2.Location = new System.Drawing.Point(562, 241);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(415, 59);
+            this.groupBox2.Size = new System.Drawing.Size(318, 59);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Debugging";
@@ -205,6 +206,19 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick_1);
             // 
+            // button1
+            // 
+            this.button1.BackgroundImage = global::ChecksumHash.Properties.Resources.integrity;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.Location = new System.Drawing.Point(388, 191);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(84, 80);
+            this.button1.TabIndex = 9;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -213,6 +227,7 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(898, 294);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cb_hastype);
@@ -256,5 +271,6 @@
         private GroupBox groupBox2;
         private TextBox tb_error;
         private System.Windows.Forms.Timer timer1;
+        private Button button1;
     }
 }

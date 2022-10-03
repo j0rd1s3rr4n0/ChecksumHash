@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.Drawing;
 using System.Runtime.Intrinsics.Arm;
 using System.Security.Cryptography;
 using System.Windows.Forms;
@@ -10,8 +11,16 @@ namespace ChecksumHash
     {
         public string path = "";
         public string filename = "";
-        Boolean isSavedFileHash = false;
         string hash = "";
+        public string file = "";
+        public int size = 2;
+        public string text = "";
+        public string s_checksum = "";
+        public string text_checksum = "";
+        public Boolean seguarda = false;
+
+        Boolean isSavedFileHash = false;
+        
         int maxValueProgressbar = 100;
         public Form1()
         {
@@ -21,6 +30,161 @@ namespace ChecksumHash
         private void groupBox1_Enter(object sender, EventArgs e)
         {
 
+        }
+        private void fun_calcularHash(Boolean save)
+        {
+            seguarda = save;
+            if (!path.Equals("") && !(cb_hastype.ToString().Equals("")))
+            {
+                tb_error.Text = "ARCHIVO SELECCIONADO";
+
+                if (cb_hastype.Text.ToString().Equals("MD5"))
+                {
+                    using (var md5 = MD5.Create())
+                    {
+                        try
+                        {
+                            using (var stream = File.OpenRead(path))
+                            {
+                                tb_hash.Text = "";
+                                carregarHashdarxiu();
+                                hash = BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", string.Empty);
+                                //return BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", string.Empty);
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            notifyIcon1.BalloonTipTitle = "ERROR 404";
+                            notifyIcon1.BalloonTipText = "Archivo NO encontrado";
+                            notifyIcon1.BalloonTipIcon = ToolTipIcon.Error;
+                            notifyIcon1.ShowBalloonTip(1000);
+                            tb_error.Text = "ERROR OCURRED";
+
+                        }
+
+                    }
+                }
+                else if (cb_hastype.Text.ToString().Equals("SHA512"))
+                {
+                    using (SHA512 sha512 = new SHA512Managed())
+                    {
+                        try
+                        {
+                            using (var stream = File.OpenRead(path))
+                            {
+                                tb_hash.Text = "";
+                                carregarHashdarxiu();
+                                hash = BitConverter.ToString(sha512.ComputeHash(stream)).Replace("-", string.Empty);
+
+                                //return BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", string.Empty);
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            notifyIcon1.BalloonTipTitle = "ERROR 404";
+                            notifyIcon1.BalloonTipText = "Archivo NO encontrado";
+                            notifyIcon1.BalloonTipIcon = ToolTipIcon.Error;
+                            notifyIcon1.ShowBalloonTip(1000);
+                            tb_error.Text = "ERROR OCURRED";
+
+                        }
+                    }
+
+                }
+                else if (cb_hastype.Text.ToString().Equals("SHA256"))
+                {
+                    using (SHA256 sha256 = new SHA256Managed())
+                    {
+                        try
+                        {
+                            using (var stream = File.OpenRead(path))
+                            {
+                                tb_hash.Text = "";
+                                carregarHashdarxiu();
+                                hash = BitConverter.ToString(sha256.ComputeHash(stream)).Replace("-", string.Empty);
+                                //return BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", string.Empty);
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            notifyIcon1.BalloonTipTitle = "ERROR 404";
+                            notifyIcon1.BalloonTipText = "Archivo NO encontrado";
+                            notifyIcon1.BalloonTipIcon = ToolTipIcon.Error;
+                            notifyIcon1.ShowBalloonTip(1000);
+                            tb_error.Text = "ERROR OCURRED";
+
+                        }
+                    }
+                }
+                else if (cb_hastype.Text.ToString().Equals("SHA384"))
+                {
+                    using (SHA384 sha1 = new SHA384Managed())
+                    {
+                        try
+                        {
+                            using (var stream = File.OpenRead(path))
+                            {
+                                tb_hash.Text = "";
+                                carregarHashdarxiu();
+                                hash = BitConverter.ToString(sha1.ComputeHash(stream)).Replace("-", string.Empty);
+                                //return BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", string.Empty);
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            notifyIcon1.BalloonTipTitle = "ERROR 404";
+                            notifyIcon1.BalloonTipText = "Archivo NO encontrado";
+                            notifyIcon1.BalloonTipIcon = ToolTipIcon.Error;
+                            notifyIcon1.ShowBalloonTip(1000);
+                            tb_error.Text = "ERROR OCURRED";
+
+                        }
+                    }
+                }
+                else if (cb_hastype.Text.ToString().Equals("SHA1"))
+                {
+                    using (SHA1Managed sha1 = new SHA1Managed())
+                    {
+                        try
+                        {
+                            using (var stream = File.OpenRead(path))
+                            {
+                                tb_hash.Text = "";
+                                carregarHashdarxiu();
+                                hash = BitConverter.ToString(sha1.ComputeHash(stream)).Replace("-", string.Empty);
+                                //return BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", string.Empty);
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            notifyIcon1.BalloonTipTitle = "ERROR FILE";
+                            notifyIcon1.BalloonTipText = "Archivo NO encontrado";
+                            notifyIcon1.BalloonTipIcon = ToolTipIcon.Error;
+                            notifyIcon1.ShowBalloonTip(1000);
+                            tb_error.Text = "ERROR OCURRED";
+
+                        }
+                    }
+                }
+                else
+                {
+                    notifyIcon1.BalloonTipTitle = "ERROR CONFIG";
+                    notifyIcon1.BalloonTipText = "Falta SELECCIONAR HashType Valido";
+                    notifyIcon1.BalloonTipIcon = ToolTipIcon.Error;
+                    notifyIcon1.ShowBalloonTip(2000);
+                    tb_error.Text = "ERROR OCURRED";
+                }
+
+            }
+            else
+            {
+                notifyIcon1.BalloonTipTitle = "ERROR FILE";
+                notifyIcon1.BalloonTipText = "NO SE SELECCIONO NINGUN ARCHIVO";
+                notifyIcon1.BalloonTipIcon = ToolTipIcon.Error;
+                notifyIcon1.ShowBalloonTip(1000);
+                tb_error.Text = "ERROR OCURRED";
+                //tb_error.Text = "NO SE SELECCIONO ARCHIVO";
+            }
         }
         public void carregarHashdarxiu()
         {
@@ -43,153 +207,9 @@ namespace ChecksumHash
         }
         private void button1_Click(object sender, EventArgs e)
         {
+            hash = "";
             isSavedFileHash = false;
-            if (!path.Equals("") && !(cb_hastype.ToString().Equals("")))
-            {
-                tb_error.Text = "ARCHIVO SELECCIONADO";
-
-                    if (cb_hastype.Text.ToString().Equals("MD5"))
-                    {
-                        using (var md5 = MD5.Create())
-                        {
-                            try
-                            {
-                                using (var stream = File.OpenRead(path))
-                                {
-                                    tb_hash.Text = "";
-                                    carregarHashdarxiu();
-                                    hash = BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", string.Empty);
-                                    //return BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", string.Empty);
-                                }
-                            }
-                            catch (Exception)
-                            {
-                                notifyIcon1.BalloonTipTitle = "ERROR 404";
-                                notifyIcon1.BalloonTipText = "Archivo NO encontrado";
-                                notifyIcon1.BalloonTipIcon = ToolTipIcon.Error;
-                                notifyIcon1.ShowBalloonTip(1000);
-                                tb_error.Text = "ERROR OCURRED";
-                                
-                            }
-                            
-                        }
-                    }else if (cb_hastype.Text.ToString().Equals("SHA512"))
-                    {
-                        using (SHA512 sha512 = new SHA512Managed())
-                        {
-                            try { 
-                                using (var stream = File.OpenRead(path))
-                                {
-                                    tb_hash.Text = "";
-                                    carregarHashdarxiu();
-                                tb_hash.Text = BitConverter.ToString(sha512.ComputeHash(stream)).Replace("-", string.Empty);
-                                    
-                                //return BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", string.Empty);
-                            }
-                            }
-                            catch (Exception)
-                            {
-                                notifyIcon1.BalloonTipTitle = "ERROR 404";
-                                notifyIcon1.BalloonTipText = "Archivo NO encontrado";
-                                notifyIcon1.BalloonTipIcon = ToolTipIcon.Error;
-                                notifyIcon1.ShowBalloonTip(1000);
-                                tb_error.Text = "ERROR OCURRED";
-
-                            }
-                        }
-
-                    }
-                    else if (cb_hastype.Text.ToString().Equals("SHA256"))
-                    {
-                        using (SHA256 sha256 = new SHA256Managed())
-                        {
-                            try{
-                                using (var stream = File.OpenRead(path))
-                                {
-                                    tb_hash.Text = "";
-                                    carregarHashdarxiu();
-                                tb_hash.Text = BitConverter.ToString(sha256.ComputeHash(stream)).Replace("-", string.Empty);
-                                    //return BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", string.Empty);
-                                }
-                            }
-                            catch (Exception)
-                            {
-                                notifyIcon1.BalloonTipTitle = "ERROR 404";
-                                notifyIcon1.BalloonTipText = "Archivo NO encontrado";
-                                notifyIcon1.BalloonTipIcon = ToolTipIcon.Error;
-                                notifyIcon1.ShowBalloonTip(1000);
-                                tb_error.Text = "ERROR OCURRED";
-
-                             }
-                        }
-                    }
-                    else if (cb_hastype.Text.ToString().Equals("SHA384"))
-                    {
-                        using (SHA384 sha1 = new SHA384Managed())
-                        {
-                            try{
-                                using (var stream = File.OpenRead(path))
-                                {
-                                    tb_hash.Text = "";
-                                    carregarHashdarxiu();
-                                tb_hash.Text = BitConverter.ToString(sha1.ComputeHash(stream)).Replace("-", string.Empty);
-                                    //return BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", string.Empty);
-                                }
-                            }
-                            catch (Exception)
-                            {
-                                notifyIcon1.BalloonTipTitle = "ERROR 404";
-                                notifyIcon1.BalloonTipText = "Archivo NO encontrado";
-                                notifyIcon1.BalloonTipIcon = ToolTipIcon.Error;
-                                notifyIcon1.ShowBalloonTip(1000);
-                                tb_error.Text = "ERROR OCURRED";
-
-                            }
-                    }
-                    }
-                    else if (cb_hastype.Text.ToString().Equals("SHA1"))
-                    {
-                        using (SHA1Managed sha1 = new SHA1Managed())
-                        {
-                            try{
-                                using (var stream = File.OpenRead(path))
-                                {
-                                    tb_hash.Text = "";
-                                    carregarHashdarxiu();
-                                    tb_hash.Text = BitConverter.ToString(sha1.ComputeHash(stream)).Replace("-", string.Empty);
-                                    //return BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", string.Empty);
-                                }
-                            }
-                            catch (Exception)
-                            {
-                                notifyIcon1.BalloonTipTitle = "ERROR FILE";
-                                notifyIcon1.BalloonTipText = "Archivo NO encontrado";
-                                notifyIcon1.BalloonTipIcon = ToolTipIcon.Error;
-                                notifyIcon1.ShowBalloonTip(1000);
-                                tb_error.Text = "ERROR OCURRED";
-
-                            }
-                        }
-                    }
-                    else
-                    {
-                        notifyIcon1.BalloonTipTitle = "ERROR CONFIG";
-                        notifyIcon1.BalloonTipText = "Falta SELECCIONAR HashType Valido";
-                        notifyIcon1.BalloonTipIcon = ToolTipIcon.Error;
-                        notifyIcon1.ShowBalloonTip(2000);
-                        tb_error.Text = "ERROR OCURRED";
-                    }
-
-            }
-            else
-            {
-                notifyIcon1.BalloonTipTitle = "ERROR FILE";
-                notifyIcon1.BalloonTipText = "NO SE SELECCIONO NINGUN ARCHIVO";
-                notifyIcon1.BalloonTipIcon = ToolTipIcon.Error;
-                notifyIcon1.ShowBalloonTip(1000);
-                tb_error.Text = "ERROR OCURRED";
-                //tb_error.Text = "NO SE SELECCIONO ARCHIVO";
-            }
+            fun_calcularHash(true);
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -219,33 +239,8 @@ namespace ChecksumHash
 
         private void button2_Click(object sender, EventArgs e)
         {
-            int size = -1;
-            string file = "";
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            DialogResult result = openFileDialog1.ShowDialog(); // Muestra el dialog de Seleccionar Archivo.
-            if (result == DialogResult.OK) // Test result.
-            {
-                file = openFileDialog1.FileName;
-                try
-                {
-                    string text = File.ReadAllText(file);
-                    size = text.Length;
-                }
-                catch (IOException)
-                {
-                }
-            }
-            //tb_error.Text = size + " " + result+" "+file; // debugging Tamaño, resultado(OK,ERROR) , path archivo
-            
-            // SI EL ESTADO DEL ARCHIVO ES OK ALMACENA PARA SEGUIR ADELANTE
-            if (result.ToString().Equals("OK")){
-                path = file; // Guarda el Path del Archivo en una variable Global
-                string [] dd = path.Split('\\');
-                filename = dd[dd.Length-1];
-                  
-                //tb_hash.Text = file+ " " + filename;  // Muestra EL path DEBUGGING
-            }
-            else{ path = ""; }
+
+            contenidoarchivo(false);
             
         }
 
@@ -285,15 +280,79 @@ namespace ChecksumHash
                 tb_hash.Text = hash; //Muestra el hash en Pantalla
                 if (!isSavedFileHash)
                 {
-                    creararchivo(); //Crea el Archivo file.extension.checksum con sus resultados dentro
+                    if (seguarda == true)
+                    {
+                        creararchivo(); //Crea el Archivo file.extension.checksum con sus resultados dentro
+                    }
                     isSavedFileHash = true;
                 }
                 
             }
         }
+        private void contenidoarchivo(Boolean isread)
+        {
+            file = "";
+            size = -1;
+            if (isread)
+            {
+                string file_s_checksum = path.Replace(filename, s_checksum);
+                try
+                {
+                    text_checksum = File.ReadAllText(file);
+                    size = text.Length;
+                }
+                catch (IOException)
+                {
+                }
+            }
+            else
+            {
+                OpenFileDialog openFileDialog1 = new OpenFileDialog();
+                DialogResult result = openFileDialog1.ShowDialog(); // Muestra el dialog de Seleccionar Archivo.
+                if (result == DialogResult.OK) // Test result.
+                {
+                    file = openFileDialog1.FileName;
+                    try
+                    {
+                        text = File.ReadAllText(file);
+                        size = text.Length;
+                    }
+                    catch (IOException)
+                    {
+                    }
+                }
+                //tb_error.Text = size + " " + result+" "+file; // debugging Tamaño, resultado(OK,ERROR) , path archivo
 
+                // SI EL ESTADO DEL ARCHIVO ES OK ALMACENA PARA SEGUIR ADELANTE
+                if (result.ToString().Equals("OK"))
+                {
+                    path = file; // Guarda el Path del Archivo en una variable Global
+                    string[] dd = path.Split('\\');
+                    filename = dd[dd.Length - 1];
+                    s_checksum = dd[dd.Length - 1] + ".checksum";
+
+
+                    //tb_hash.Text = file+ " " + filename;  // Muestra EL path DEBUGGING
+                }
+                else { path = ""; }
+            }
+
+        }
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+          
+            fun_calcularHash(false); // Calcula el hash del archivo NUEVO
+            contenidoarchivo(true);      // Obtiene el hash.checksum del archivo viejo
+            
+            //SI LA LINEA CONTIENE cb_hastype.Text
+            //PARSEA ESA LINEA
+            //COMPARA hash vs LINEA_hash
+
 
         }
     }
