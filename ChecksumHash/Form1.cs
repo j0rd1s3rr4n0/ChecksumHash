@@ -345,14 +345,15 @@ namespace ChecksumHash
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-          
-            fun_calcularHash(false); // Calcula el hash del archivo NUEVO
-            contenidoarchivo(true);      // Obtiene el hash.checksum del archivo viejo
-            
-            //SI LA LINEA CONTIENE cb_hastype.Text
-            //PARSEA ESA LINEA
-            //COMPARA hash vs LINEA_hash
+            if (hash != "" && filename != "")
+            {
+                fun_calcularHash(false); // Calcula el hash del archivo NUEVO
+                contenidoarchivo(true);      // Obtiene el hash.checksum del archivo viejo
 
+                //SI LA LINEA CONTIENE cb_hastype.Text
+                //PARSEA ESA LINEA
+                //COMPARA hash vs LINEA_hash
+            }
 
         }
     }
