@@ -12523,6 +12523,17 @@
   <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>317, 17</value>
   </metadata>
+  <data name="label5.Text" xml:space="preserve">
+    <value>1. Seleccione un Archivo.
+
+2. Haga click en el Botón de HandShake.
+
+3. Obtendra un Resultado Visual a su derecha:
+
+3.1 LUZ ROJA: El archivo ha sido modificado o su información se ha corrompido.
+ 
+3.2 LUZ VERDE: El archivo NO ha sido modificado.</value>
+  </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABABUAAAAAAAEAIACtWQAAVgEAAAAAAAABACAAKCAEAANbAACAgAAAAQAgACgIAQArewQAYGAAAAEA
